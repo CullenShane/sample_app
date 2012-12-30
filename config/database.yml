@@ -11,3 +11,11 @@ development:
   pool: 5
   database: sample-app-dev
 
+
+test:
+  adapter: postgresql
+  host: localhost
+  username: rails
+  password: ror
+  pool: 5
+  database: sample-app-test
