@@ -3,7 +3,7 @@
 
 require 'active_support/core_ext'
 
-guard 'spork', :rspec_env => { 'RAILS_ENV' => 'test' } do
+guard 'spork', cli: '--drb',  :rspec_env => { 'RAILS_ENV' => 'test' } do
   watch('config/application.rb')
   watch('config/environment.rb')
   watch(%r{^config/environments/.+\.rb$})
@@ -15,7 +15,12 @@ guard 'spork', :rspec_env => { 'RAILS_ENV' => 'test' } do
   watch('spec/support/')
 end
 
-guard 'rspec', :version => 2, :all_after_pass => false do
+guard 'rails' do
+  watch('Gemfile.lock')
+  watch(%r{^(config|lib)/.*})
+end
+
+guard 'rspec' do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }
